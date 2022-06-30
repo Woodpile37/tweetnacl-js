@@ -1,5 +1,4 @@
-TweetNaCl.js
-============
+# TweetNaCl.js
 
 Port of [TweetNaCl](http://tweetnacl.cr.yp.to) / [NaCl](http://nacl.cr.yp.to/)
 to JavaScript for modern browsers and Node.js. Public domain.
@@ -9,30 +8,27 @@ to JavaScript for modern browsers and Node.js. Public domain.
 
 Demo: <https://dchest.github.io/tweetnacl-js/>
 
-Documentation
-=============
+# Documentation
 
-* [Overview](#overview)
-* [Audits](#audits)
-* [Installation](#installation)
-* [Examples](#examples)
-* [Usage](#usage)
-  * [Public-key authenticated encryption (box)](#public-key-authenticated-encryption-box)
-  * [Secret-key authenticated encryption (secretbox)](#secret-key-authenticated-encryption-secretbox)
-  * [Scalar multiplication](#scalar-multiplication)
-  * [Signatures](#signatures)
-  * [Hashing](#hashing)
-  * [Random bytes generation](#random-bytes-generation)
-  * [Constant-time comparison](#constant-time-comparison)
-* [System requirements](#system-requirements)
-* [Development and testing](#development-and-testing)
-* [Benchmarks](#benchmarks)
-* [Contributors](#contributors)
-* [Who uses it](#who-uses-it)
+- [Overview](#overview)
+- [Audits](#audits)
+- [Installation](#installation)
+- [Examples](#examples)
+- [Usage](#usage)
+  - [Public-key authenticated encryption (box)](#public-key-authenticated-encryption-box)
+  - [Secret-key authenticated encryption (secretbox)](#secret-key-authenticated-encryption-secretbox)
+  - [Scalar multiplication](#scalar-multiplication)
+  - [Signatures](#signatures)
+  - [Hashing](#hashing)
+  - [Random bytes generation](#random-bytes-generation)
+  - [Constant-time comparison](#constant-time-comparison)
+- [System requirements](#system-requirements)
+- [Development and testing](#development-and-testing)
+- [Benchmarks](#benchmarks)
+- [Contributors](#contributors)
+- [Who uses it](#who-uses-it)
 
-
-Overview
---------
+## Overview
 
 The primary goal of this project is to produce a translation of TweetNaCl to
 JavaScript which is as close as possible to the original C implementation, plus
@@ -40,15 +36,13 @@ a thin layer of idiomatic high-level API on top of it.
 
 There are two versions, you can use either of them:
 
-* `nacl.js` is the port of TweetNaCl with minimum differences from the
+- `nacl.js` is the port of TweetNaCl with minimum differences from the
   original + high-level API.
 
-* `nacl-fast.js` is like `nacl.js`, but with some functions replaced with
+- `nacl-fast.js` is like `nacl.js`, but with some functions replaced with
   faster versions. (Used by default when importing NPM package.)
 
-
-Audits
-------
+## Audits
 
 TweetNaCl.js has been audited by [Cure53](https://cure53.de/) in January-February
 2017 (audit was sponsored by [Deletype](https://deletype.com)):
@@ -61,9 +55,7 @@ TweetNaCl.js has been audited by [Cure53](https://cure53.de/) in January-Februar
 
 While the audit didn't find any bugs, there has been [1 bug](https://github.com/dchest/tweetnacl-js/issues/187) discovered and fixed after the audit.
 
-
-Installation
-------------
+## Installation
 
 You can install TweetNaCl.js via a package manager:
 
@@ -77,16 +69,13 @@ You can install TweetNaCl.js via a package manager:
 
 or [download source code](https://github.com/dchest/tweetnacl-js/releases).
 
+## Examples
 
-Examples
---------
 You can find usage examples in our [wiki](https://github.com/dchest/tweetnacl-js/wiki/Examples).
 
+## Usage
 
-Usage
------
-
-All API functions accept and return bytes as `Uint8Array`s.  If you need to
+All API functions accept and return bytes as `Uint8Array`s. If you need to
 encode or decode strings, use functions from
 <https://github.com/dchest/tweetnacl-util-js> or one of the more robust codec
 packages.
@@ -99,10 +88,9 @@ convert them manually; make sure to convert using copying: `Buffer.from(array)`
 `Buffer.from(array.buffer)` (or `new Buffer(array.buffer)` Node 4 or earlier),
 because some functions return subarrays of their buffers.
 
-
 ### Public-key authenticated encryption (box)
 
-Implements *x25519-xsalsa20-poly1305*.
+Implements _x25519-xsalsa20-poly1305_.
 
 #### nacl.box.keyPair()
 
@@ -113,7 +101,6 @@ Generates a new random key pair for box and returns it as an object with
        publicKey: ...,  // Uint8Array with 32-byte public key
        secretKey: ...   // Uint8Array with 32-byte secret key
     }
-
 
 #### nacl.box.keyPair.fromSecretKey(secretKey)
 
@@ -170,10 +157,9 @@ Length of nonce in bytes.
 
 Length of overhead added to box compared to original message.
 
-
 ### Secret-key authenticated encryption (secretbox)
 
-Implements *xsalsa20-poly1305*.
+Implements _xsalsa20-poly1305_.
 
 #### nacl.secretbox(message, nonce, key)
 
@@ -203,10 +189,9 @@ Length of nonce in bytes.
 
 Length of overhead added to secret box compared to original message.
 
-
 ### Scalar multiplication
 
-Implements *x25519*.
+Implements _x25519_.
 
 #### nacl.scalarMult(n, p)
 
@@ -227,7 +212,6 @@ Length of scalar in bytes.
 ##### nacl.scalarMult.groupElementLength = 32
 
 Length of group element in bytes.
-
 
 ### Signatures
 
@@ -293,10 +277,9 @@ Length of seed for `nacl.sign.keyPair.fromSeed` in bytes.
 
 Length of signature in bytes.
 
-
 ### Hashing
 
-Implements *SHA-512*.
+Implements _SHA-512_.
 
 #### nacl.hash(message)
 
@@ -307,7 +290,6 @@ Returns SHA-512 hash of the message.
 ##### nacl.hash.hashLength = 64
 
 Length of hash in bytes.
-
 
 ### Random bytes generation
 
@@ -321,16 +303,16 @@ cryptographic quality.
 TweetNaCl.js uses the following methods to generate random bytes,
 depending on the platform it runs on:
 
-* `window.crypto.getRandomValues` (WebCrypto standard)
-* `window.msCrypto.getRandomValues` (Internet Explorer 11)
-* `crypto.randomBytes` (Node.js)
+- `window.crypto.getRandomValues` (WebCrypto standard)
+- `window.msCrypto.getRandomValues` (Internet Explorer 11)
+- `crypto.randomBytes` (Node.js)
 
 If the platform doesn't provide a suitable PRNG, the following functions,
 which require random numbers, will throw exception:
 
-* `nacl.randomBytes`
-* `nacl.box.keyPair`
-* `nacl.sign.keyPair`
+- `nacl.randomBytes`
+- `nacl.box.keyPair`
+- `nacl.sign.keyPair`
 
 Other functions are deterministic and will continue working.
 
@@ -343,9 +325,8 @@ TweetNaCl.js like this:
       // ... copy n random bytes into x ...
     });
 
-Note that `nacl.setPRNG` *completely replaces* internal random byte generator
+Note that `nacl.setPRNG` _completely replaces_ internal random byte generator
 with the one provided.
-
 
 ### Constant-time comparison
 
@@ -357,26 +338,22 @@ non-zero and equal, and their contents are equal.
 Returns `false` if either of the arguments has zero length, or arguments have
 different lengths, or their contents differ.
 
-
-System requirements
--------------------
+## System requirements
 
 TweetNaCl.js supports modern browsers that have a cryptographically secure
 pseudorandom number generator and typed arrays, including the latest versions
 of:
 
-* Chrome
-* Firefox
-* Safari (Mac, iOS)
-* Internet Explorer 11
+- Chrome
+- Firefox
+- Safari (Mac, iOS)
+- Internet Explorer 11
 
 Other systems:
 
-* Node.js
+- Node.js
 
-
-Development and testing
-------------------------
+## Development and testing
 
 Install NPM modules needed for development:
 
@@ -427,56 +404,48 @@ To run benchmarks in Node.js:
 To run benchmarks in a browser, open `test/benchmark/bench.html` (or
 `test/benchmark/bench-fast.html`).
 
-
-Benchmarks
-----------
+## Benchmarks
 
 For reference, here are benchmarks from MacBook Pro (Retina, 13-inch, Mid 2014)
 laptop with 2.6 GHz Intel Core i5 CPU (Intel) in Chrome 53/OS X, Xiaomi Redmi
 Note 3 smartphone with 1.8 GHz Qualcomm Snapdragon 650 64-bit CPU (ARM) in
 Chrome 52/Android, and MacBook Air 2020 with Apple M1 SOC (M1) in Chromium 102/macOS.
 
-|               | nacl.js Intel | nacl-fast.js Intel  |   nacl.js ARM | nacl-fast.js ARM  | nacl-fast.js M1   |
-| ------------- |:-------------:|:-------------------:|:-------------:|:-----------------:|:-----------------:|
-| salsa20       | 1.3 MB/s      | 128 MB/s            |  0.4 MB/s     |  43 MB/s          |  268 MB/s         |
-| poly1305      | 13 MB/s       | 171 MB/s            |  4 MB/s       |  52 MB/s          |  248 MB/s         |
-| hash          | 4 MB/s        | 34 MB/s             |  0.9 MB/s     |  12 MB/s          |  76 MB/s          |
-| secretbox 1K  | 1113 op/s     | 57583 op/s          |  334 op/s     |  14227 op/s       |  54546 op/s       |
-| box 1K        | 145 op/s      | 718 op/s            |  37 op/s      |  368 op/s         |  1836 op/s        |
-| scalarMult    | 171 op/s      | 733 op/s            |  56 op/s      |  380 op/s         |  1882 op/s        |
-| sign          | 77  op/s      | 200 op/s            |  20 op/s      |  61 op/s          |  592 op/s         |
-| sign.open     | 39  op/s      | 102  op/s           |  11 op/s      |  31 op/s          |  300 op/s         |
+|              | nacl.js Intel | nacl-fast.js Intel | nacl.js ARM | nacl-fast.js ARM | nacl-fast.js M1 |
+| ------------ | :-----------: | :----------------: | :---------: | :--------------: | :-------------: |
+| salsa20      |   1.3 MB/s    |      128 MB/s      |  0.4 MB/s   |     43 MB/s      |    268 MB/s     |
+| poly1305     |    13 MB/s    |      171 MB/s      |   4 MB/s    |     52 MB/s      |    248 MB/s     |
+| hash         |    4 MB/s     |      34 MB/s       |  0.9 MB/s   |     12 MB/s      |     76 MB/s     |
+| secretbox 1K |   1113 op/s   |     57583 op/s     |  334 op/s   |    14227 op/s    |   54546 op/s    |
+| box 1K       |   145 op/s    |      718 op/s      |   37 op/s   |     368 op/s     |    1836 op/s    |
+| scalarMult   |   171 op/s    |      733 op/s      |   56 op/s   |     380 op/s     |    1882 op/s    |
+| sign         |    77 op/s    |      200 op/s      |   20 op/s   |     61 op/s      |    592 op/s     |
+| sign.open    |    39 op/s    |      102 op/s      |   11 op/s   |     31 op/s      |    300 op/s     |
 
 (You can run benchmarks on your devices by clicking on the links at the bottom
 of the [home page](https://tweetnacl.js.org)).
 
-In short, with *nacl-fast.js* and 1024-byte messages you can expect to encrypt and
+In short, with _nacl-fast.js_ and 1024-byte messages you can expect to encrypt and
 authenticate more than 57000 messages per second on a typical laptop or more than
 14000 messages per second on a $170 smartphone, sign about 500 and verify 300
 messages per second on a laptop or 60 and 30 messages per second on a smartphone,
 per CPU core (with Web Workers you can do these operations in parallel),
 which is good enough for most applications.
 
-
-Contributors
-------------
+## Contributors
 
 See AUTHORS.md file.
 
+## Third-party libraries based on TweetNaCl.js
 
-Third-party libraries based on TweetNaCl.js
--------------------------------------------
+- [chloride](https://github.com/dominictarr/chloride) - unified API for various NaCl modules
+- [forward-secrecy](https://github.com/alax/forward-secrecy) — Axolotl ratchet implementation
+- [nacl-stream](https://github.com/dchest/nacl-stream-js) - streaming encryption
+- [ristretto255-js](https://github.com/calibra/ristretto255-js) — implementation of the [ristretto255 group](https://ristretto.group/)
+- [tweetnacl-auth-js](https://github.com/dchest/tweetnacl-auth-js) — implementation of [`crypto_auth`](http://nacl.cr.yp.to/auth.html)
+- [tweetnacl-js-sealed-box](https://github.com/TogaTech/tweetnacl-js-sealed-box) — fork that adds [`sealed boxes`](https://download.libsodium.org/doc/public-key_cryptography/sealed_boxes.html)
+- [ed2curve](https://github.com/dchest/ed2curve-js) — convert Ed25519 signing key pair to X25519 boxes key pair
 
-* [chloride](https://github.com/dominictarr/chloride) - unified API for various NaCl modules
-* [forward-secrecy](https://github.com/alax/forward-secrecy) — Axolotl ratchet implementation
-* [nacl-stream](https://github.com/dchest/nacl-stream-js) - streaming encryption
-* [ristretto255-js](https://github.com/calibra/ristretto255-js) — implementation of the [ristretto255 group](https://ristretto.group/)
-* [tweetnacl-auth-js](https://github.com/dchest/tweetnacl-auth-js) — implementation of [`crypto_auth`](http://nacl.cr.yp.to/auth.html)
-* [tweetnacl-js-sealed-box](https://github.com/TogaTech/tweetnacl-js-sealed-box) — fork that adds [`sealed boxes`](https://download.libsodium.org/doc/public-key_cryptography/sealed_boxes.html)
-* [ed2curve](https://github.com/dchest/ed2curve-js) — convert Ed25519 signing key pair to X25519 boxes key pair
-
-
-Who uses it
------------
+## Who uses it
 
 Some notable users of TweetNaCl.js are listed on the [associated wiki page](https://github.com/dchest/tweetnacl-js/wiki/Who-uses-TweetNaCl.js).

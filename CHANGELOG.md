@@ -1,10 +1,8 @@
-TweetNaCl.js Changelog
-======================
+# TweetNaCl.js Changelog
 
-v1.0.3
-------
+## v1.0.3
 
-***IMPORTANT BUG FIX***. Due to a bug in calculating carry in
+**_IMPORTANT BUG FIX_**. Due to a bug in calculating carry in
 modulo reduction that used bit operations on integers larger than
 32 bits, `nacl.sign` or `nacl.sign.detached` could have created
 incorrect signatures.
@@ -13,31 +11,23 @@ This only affects signing, not verification.
 
 Thanks to @valerini on GitHub for finding and reporting the bug.
 
-
-v1.0.2
-------
+## v1.0.2
 
 Exported more internal undocumented functions for
 third-party projects that rely on low-level interface,
 (something users of TweetNaCl shouldn't care about).
 
-
-v1.0.1
-------
+## v1.0.1
 
 Updated documentation and typings.
 
-
-v1.0.0
-------
+## v1.0.0
 
 No code changes from v1.0.0-rc.1.
 
+## v1.0.0-rc.1
 
-v1.0.0-rc.1
------------
-
-* **IMPORTANT!** In previous versions, `nacl.secretbox.open`, `nacl.box.open`,
+- **IMPORTANT!** In previous versions, `nacl.secretbox.open`, `nacl.box.open`,
   and `nacl.box.after` returned `false` when opening failed (for example, when
   using incorrect key, nonce, or when input was maliciously or accidentally
   modified after encryption). This version instead returns `null`.
@@ -57,34 +47,28 @@ v1.0.0-rc.1
 
   (`nacl.sign.open` always returned `null`, so it is not affected.)
 
-
-* Arguments type check now uses `instanceof Uint8Array` instead of `Object.prototype.toString`.
-* Removed deprecation checks for `nacl.util` (moved to a
+- Arguments type check now uses `instanceof Uint8Array` instead of `Object.prototype.toString`.
+- Removed deprecation checks for `nacl.util` (moved to a
   [separate package](https://github.com/dchest/tweetnacl-util-js) in v0.14.0).
-* Removed deprecation checks for the old signature API (changed in v0.10.0).
-* Improved benchmarking.
+- Removed deprecation checks for the old signature API (changed in v0.10.0).
+- Improved benchmarking.
 
-v0.14.5
--------
+## v0.14.5
 
-* Fixed incomplete return types in TypeScript typings.
-* Replaced COPYING.txt with LICENSE file, which now has public domain dedication
+- Fixed incomplete return types in TypeScript typings.
+- Replaced COPYING.txt with LICENSE file, which now has public domain dedication
   text from The Unlicense. License fields in package.json and bower.json have
   been set to "Unlicense". The project was and will be in the public domain --
   this change just makes it easier for automated tools to know about this fact by
   using the widely recognized and SPDX-compatible template for public domain
   dedication.
 
+## v0.14.4
 
-v0.14.4
--------
+- Added TypeScript type definitions (contributed by @AndSDev).
+- Improved benchmarking code.
 
-* Added TypeScript type definitions (contributed by @AndSDev).
-* Improved benchmarking code.
-
-
-v0.14.3
--------
+## v0.14.3
 
 Fixed a bug in the fast version of Poly1305 and brought it back.
 
@@ -97,23 +81,17 @@ Thanks to @floodyberry for promptly responding and fixing the original C code:
 
 https://github.com/floodyberry/poly1305-donna/issues/2#issuecomment-202698577
 
-
-v0.14.2
--------
+## v0.14.2
 
 Switched Poly1305 fast version back to original (slow) version due to a bug.
 
-
-v0.14.1
--------
+## v0.14.1
 
 No code changes, just tweaked packaging and added COPYING.txt.
 
+## v0.14.0
 
-v0.14.0
--------
-
-* **Breaking change!** All functions from `nacl.util` have been removed. These
+- **Breaking change!** All functions from `nacl.util` have been removed. These
   functions are no longer available:
 
       nacl.util.decodeUTF8
@@ -140,135 +118,109 @@ v0.14.0
   Currently calling these functions will throw error pointing to
   `tweetnacl-util-js` (in the next version this error message will be removed).
 
-* Improved detection of available random number generators, making it possible
+- Improved detection of available random number generators, making it possible
   to use `nacl.randomBytes` and related functions in Web Workers without
   changes.
 
-* Changes to testing (see README).
+- Changes to testing (see README).
 
-
-v0.13.3
--------
+## v0.13.3
 
 No code changes.
 
-* Reverted license field in package.json to "Public domain".
+- Reverted license field in package.json to "Public domain".
 
-* Fixed typo in README.
+- Fixed typo in README.
 
+## v0.13.2
 
-v0.13.2
--------
+- Fixed undefined variable bug in fast version of Poly1305. No worries, this
+  bug was _never_ triggered.
 
-* Fixed undefined variable bug in fast version of Poly1305. No worries, this
-  bug was *never* triggered.
+- Specified CC0 public domain dedication.
 
-* Specified CC0 public domain dedication.
+- Updated development dependencies.
 
-* Updated development dependencies.
+## v0.13.1
 
+- Exclude `crypto` and `buffer` modules from browserify builds.
 
-v0.13.1
--------
+## v0.13.0
 
-* Exclude `crypto` and `buffer` modules from browserify builds.
-
-
-v0.13.0
--------
-
-* Made `nacl-fast` the default version in NPM package. Now
+- Made `nacl-fast` the default version in NPM package. Now
   `require("tweetnacl")` will use fast version; to get the original version,
   use `require("tweetnacl/nacl.js")`.
 
-* Cleanup temporary array after generating random bytes.
+- Cleanup temporary array after generating random bytes.
 
+## v0.12.2
 
-v0.12.2
--------
-
-* Improved performance of curve operations, making `nacl.scalarMult`, `nacl.box`,
+- Improved performance of curve operations, making `nacl.scalarMult`, `nacl.box`,
   `nacl.sign` and related functions up to 3x faster in `nacl-fast` version.
 
+## v0.12.1
 
-v0.12.1
--------
-
-* Significantly improved performance of Salsa20 (~1.5x faster) and
+- Significantly improved performance of Salsa20 (~1.5x faster) and
   Poly1305 (~3.5x faster) in `nacl-fast` version.
 
+## v0.12.0
 
-v0.12.0
--------
-
-* Instead of using the given secret key directly, TweetNaCl.js now copies it to
+- Instead of using the given secret key directly, TweetNaCl.js now copies it to
   a new array in `nacl.box.keyPair.fromSecretKey` and
   `nacl.sign.keyPair.fromSecretKey`.
 
+## v0.11.2
 
-v0.11.2
--------
+- Added new constant: `nacl.sign.seedLength`.
 
-* Added new constant: `nacl.sign.seedLength`.
+## v0.11.1
 
+- Even faster hash for both short and long inputs (in `nacl-fast`).
 
-v0.11.1
--------
+## v0.11.0
 
-* Even faster hash for both short and long inputs (in `nacl-fast`).
-
-
-v0.11.0
--------
-
-* Implement `nacl.sign.keyPair.fromSeed` to enable creation of sign key pairs
+- Implement `nacl.sign.keyPair.fromSeed` to enable creation of sign key pairs
   deterministically from a 32-byte seed. (It behaves like
   [libsodium's](http://doc.libsodium.org/public-key_cryptography/public-key_signatures.html)
   `crypto_sign_seed_keypair`: the seed becomes a secret part of the secret key.)
 
-* Fast version now has an improved hash implementation that is 2x-5x faster.
+- Fast version now has an improved hash implementation that is 2x-5x faster.
 
-* Fixed benchmarks, which may have produced incorrect measurements.
+- Fixed benchmarks, which may have produced incorrect measurements.
 
+## v0.10.1
 
-v0.10.1
--------
+- Exported undocumented `nacl.lowlevel.crypto_core_hsalsa20`.
 
-* Exported undocumented `nacl.lowlevel.crypto_core_hsalsa20`.
+## v0.10.0
 
+- **Signature API breaking change!** `nacl.sign` and `nacl.sign.open` now deal
+  with signed messages, and new `nacl.sign.detached` and
+  `nacl.sign.detached.verify` are available.
 
-v0.10.0
--------
+Previously, `nacl.sign` returned a signature, and `nacl.sign.open` accepted a
+message and "detached" signature. This was unlike NaCl's API, which dealt with
+signed messages (concatenation of signature and message).
 
-* **Signature API breaking change!** `nacl.sign` and `nacl.sign.open` now deal
- with signed messages, and new `nacl.sign.detached` and
- `nacl.sign.detached.verify` are available.
-
- Previously, `nacl.sign` returned a signature, and `nacl.sign.open` accepted a
- message and "detached" signature. This was unlike NaCl's API, which dealt with
- signed messages (concatenation of signature and message).
-
- The new API is:
+The new API is:
 
       nacl.sign(message, secretKey) -> signedMessage
       nacl.sign.open(signedMessage, publicKey) -> message | null
 
- Since detached signatures are common, two new API functions were introduced:
+Since detached signatures are common, two new API functions were introduced:
 
       nacl.sign.detached(message, secretKey) -> signature
       nacl.sign.detached.verify(message, signature, publicKey) -> true | false
 
- (Note that it's `verify`, not `open`, and it returns a boolean value, unlike
- `open`, which returns an "unsigned" message.)
+(Note that it's `verify`, not `open`, and it returns a boolean value, unlike
+`open`, which returns an "unsigned" message.)
 
-* NPM package now comes without `test` directory to keep it small.
+- NPM package now comes without `test` directory to keep it small.
 
+## v0.9.2
 
-v0.9.2
-------
-
-* Improved documentation.
-* Fast version: increased theoretical message size limit from 2^32-1 to 2^52
+- Improved documentation.
+- Fast version: increased theoretical message size limit from 2^32-1 to 2^52
   bytes in Poly1305 (and thus, secretbox and box). However this has no impact
   in practice since JavaScript arrays or ArrayBuffers are limited to 32-bit
   indexes, and most implementations won't allocate more than a gigabyte or so.
@@ -276,8 +228,6 @@ v0.9.2
   it's not recommended to use messages that large without splitting them into
   smaller packets anyway.
 
+## v0.9.1
 
-v0.9.1
-------
-
-* Initial release
+- Initial release
