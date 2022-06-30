@@ -31,7 +31,7 @@ test('nacl.scalarMult timings', function(t) {
       for (var k = 16; k < 32; k++) x[k] = 0;
     }
     var diff = measure(x, prev);
-    console.log(i + ': ' + diff + 'ms');
+    
     prev = z;
     diffs.push({
       diff: diff,
@@ -41,19 +41,19 @@ test('nacl.scalarMult timings', function(t) {
   }
   diffs.sort(function (a, b) { return a.diff - b.diff; })
   var lo = diffs[0], hi = diffs[diffs.length-1];
-  console.log('Lowest : ' + lo.diff + 'ms');
-  console.log(hex(lo.x), hex(lo.prev));
-  console.log('Highest: ' + hi.diff + 'ms');
-  console.log(hex(hi.x), hex(hi.prev));
-  console.log('Difference: ' + (hi.diff - lo.diff) + 'ms');
+  
+  
+  
+  
+  
 
   /* Retest low and high */
-  console.log('* Retesting low and high');
+  
   var rlo = measure(lo.x, lo.prev);
   var rhi = measure(hi.x, hi.prev);
-  console.log('Re-test low: ' + rlo + 'ms');
-  console.log('Re-test high: ' + rhi + 'ms');
-  console.log('New difference: ' + (rhi - rlo) + 'ms');
+  
+  
+  
 
   t.end();
 });
