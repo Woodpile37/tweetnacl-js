@@ -14,7 +14,9 @@
     "build-test-browser": "browserify test/browser/init.js test/*.js | uglifyjs -c -m -o test/browser/_bundle.js 2>/dev/null && browserify test/browser/init.js test/*.quick.js | uglifyjs -c -m -o test/browser/_bundle-quick.js 2>/dev/null",
     "test": "npm run test-node-all",
     "bench": "node test/benchmark/bench.js",
-    "lint": "eslint nacl.js nacl-fast.js test/*.js test/benchmark/*.js"
+    "lint": "eslint nacl.js nacl-fast.js test/*.js test/benchmark/*.js",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -42,15 +44,19 @@
   "homepage": "https://tweetnacl.js.org",
   "devDependencies": {
     "browserify": "^16.2.3",
-    "eslint": "^6.8.0",
-    "faucet": "^0.0.1",
+    "eslint": "^7.0.0",
+    "faucet": "^0.0.2",
     "tap-browser-color": "^0.1.2",
     "tape": "^4.13.0",
     "tweetnacl-util": "^0.15.0",
-    "uglify-js": "^3.7.5"
+    "uglify-js": "^3.14.3"
   },
   "browser": {
     "buffer": false,
     "crypto": false
+  },
+  "snyk": true,
+  "dependencies": {
+    "@snyk/protect": "latest"
   }
 }
