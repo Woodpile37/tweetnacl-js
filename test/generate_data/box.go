@@ -35,7 +35,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Print("module.exports = ");
+	fmt.Print("module.exports = ")
 	fmt.Print(string(out))
 	fmt.Println(";")
 }

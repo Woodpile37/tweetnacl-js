@@ -1,1 +1,1 @@
-var _ = require('tap-browser-color')();
+const _ = require("tap-browser-color")();
