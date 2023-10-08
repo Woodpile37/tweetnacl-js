@@ -45,7 +45,7 @@
     "eslint": "^6.8.0",
     "faucet": "^0.0.1",
     "tap-browser-color": "^0.1.2",
-    "tape": "^4.13.0",
+    "tape": "^5.6.6",
     "tweetnacl-util": "^0.15.0",
     "uglify-js": "^3.7.5"
   },
